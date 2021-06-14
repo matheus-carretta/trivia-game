@@ -1,4 +1,4 @@
-import { FETCH_TOKEN } from '../actions/types';
+import { FETCH_TOKEN, SAVE_USER } from '../actions/types';
 
 const INITIAL_STATE = {
   token: '',
@@ -12,6 +12,11 @@ const user = (state = INITIAL_STATE, { type, payload }) => {
     return {
       ...state,
       token: payload.token,
+    };
+  case SAVE_USER:
+    return {
+      ...state,
+      name: payload.user.name,
     };
   default:
     return state;

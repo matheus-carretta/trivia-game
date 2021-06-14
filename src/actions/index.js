@@ -1,4 +1,4 @@
-import { FETCH_TOKEN } from './types';
+import { FETCH_TOKEN, SAVE_USER } from './types';
 import { apiTokenRequest } from '../services/api';
 
 export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((token) => {
@@ -9,6 +9,14 @@ export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((toke
       token,
     },
   });
+});
+
+export const actionSaveUser = (user, gravatar) => ({
+  type: SAVE_USER,
+  payload: {
+    user,
+    gravatar,
+  },
 });
 
 export const actionXXY = () => ({
