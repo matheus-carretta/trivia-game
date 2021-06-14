@@ -1,4 +1,7 @@
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  name: '',
+  gravatar: '',
+};
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
