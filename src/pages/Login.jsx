@@ -23,25 +23,18 @@ class Login extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     const { nome, email } = this.state;
     const { getToken, saveUser } = this.props;
     getToken();
     const gravatar = md5(email).toString();
     const state = {
-      player: {
-        name: nome,
-        assertions: 0,
-        score: 0,
-        gravatarEmail: email,
-      },
+      player: { name: nome, assertions: 0, score: 0, gravatarEmail: email },
     };
     saveUser(state.player, gravatar);
     localStorage.setItem('state', JSON.stringify(state));
-    this.setState({
-      redirect: true,
-    });
+    this.setState({ redirect: true });
   }
 
   render() {
