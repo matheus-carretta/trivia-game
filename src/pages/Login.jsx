@@ -49,7 +49,6 @@ class Login extends React.Component {
           data-testid="btn-play"
           disabled={ !nome.length || !email.length }
         >
-          {' '}
           Jogar
         </button>
       </form>);
