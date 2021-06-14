@@ -4,6 +4,9 @@ const INITIAL_STATE = {
   token: '',
   name: '',
   gravatar: '',
+  gravatarEmail: '',
+  score: 0,
+  assertions: 0,
 };
 
 const user = (state = INITIAL_STATE, { type, payload }) => {
@@ -17,6 +20,10 @@ const user = (state = INITIAL_STATE, { type, payload }) => {
     return {
       ...state,
       name: payload.user.name,
+      gravatarEmail: payload.user.gravatarEmail,
+      assertions: payload.user.assertions,
+      score: payload.user.score,
+      gravatar: `https://www.gravatar.com/avatar/${payload.gravatar}`,
     };
   default:
     return state;

@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   render() {
-    const { linkGravatar, name, score } = this.props;
+    const { gravatar, name, score } = this.props;
     return (
       <header>
         <img
           data-testid="header-profile-picture"
           alt="user login"
-          src={ linkGravatar }
+          src={ gravatar }
         />
         <h4
           data-testid="header-player-name"
@@ -31,13 +31,13 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  linkGravatar: state.user.gravatar,
   name: state.user.name,
-  score: state.game.score,
+  gravatar: state.user.gravatar,
+  score: state.user.score,
 });
 
 Header.propTypes = {
-  linkGravatar: PropTypes.string.isRequired,
+  gravatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
 };
