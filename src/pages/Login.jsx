@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { actionFetchToken } from '../actions';
+import md5 from 'crypto-js/md5';
+import { actionFetchToken, actionSaveUser } from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,8 +25,23 @@ class Login extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { getToken } = this.props;
+    const { nome, email } = this.state;
+    const { getToken, saveUser } = this.props;
     getToken();
+    const gravatar = md5(email).toString();
+    const state = {
+      player: {
+        name: nome,
+        assertions: 0,
+        score: 0,
+        gravatarEmail: email,
+      },
+    };
+    saveUser(state.player, gravatar);
+    localStorage.setItem('state', JSON.stringify(state));
+    this.setState({
+      redirect: true,
+    });
   }
 
   render() {
@@ -71,6 +87,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   getToken: PropTypes.func.isRequired,
+  saveUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -79,6 +96,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getToken: () => dispatch(actionFetchToken()),
+  saveUser: (user, gravatar) => dispatch(actionSaveUser(user, gravatar)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
