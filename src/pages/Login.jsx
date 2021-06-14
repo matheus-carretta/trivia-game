@@ -1,6 +1,8 @@
 import React from 'react';
-// import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { actionFetchToken } from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -8,8 +10,10 @@ class Login extends React.Component {
     this.state = {
       nome: '',
       email: '',
+      redirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange({ target: { value, name } }) {
@@ -18,10 +22,18 @@ class Login extends React.Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    const { getToken } = this.props;
+    getToken();
+  }
+
   render() {
-    const { nome, email } = this.state;
+    const { nome, email, redirect } = this.state;
+    if (redirect) return <Redirect to="/game" />;
+
     return (
-      <form>
+      <form onSubmit={ this.handleSubmit }>
         <label htmlFor="input-player-name">
           Nome:
           <input
@@ -51,12 +63,22 @@ class Login extends React.Component {
         >
           Jogar
         </button>
-      </form>);
+        <Link data-testid="btn-settings" to="/settings">Settings</Link>
+      </form>
+    );
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
+Login.propTypes = {
+  getToken: PropTypes.func.isRequired,
+};
 
-// });
+const mapStateToProps = (state) => ({
+  token: state.user.token,
+});
 
-export default connect(null, null)(Login);
+const mapDispatchToProps = (dispatch) => ({
+  getToken: () => dispatch(actionFetchToken()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

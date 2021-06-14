@@ -1,9 +1,16 @@
-const INITIAL_STATE = {};
+import { FETCH_TOKEN } from '../actions/types';
 
-const user = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-  case '':
-    return state;
+const INITIAL_STATE = {
+  token: '',
+};
+
+const user = (state = INITIAL_STATE, { type, payload }) => {
+  switch (type) {
+  case FETCH_TOKEN:
+    return {
+      ...state,
+      token: payload.token,
+    };
   default:
     return state;
   }
