@@ -5,3 +5,4 @@ export const FETCH_GAME_DATA = 'FETCH_GAME_DATA';
 export const PAUSE_TIME = 'PAUSE_TIME';
 export const SET_TIMER = 'SET_TIMER';
 export const SAVE_SCORE = 'SAVE_SCORE';
+export const REESTART_TIME = 'REESTART_TIME';

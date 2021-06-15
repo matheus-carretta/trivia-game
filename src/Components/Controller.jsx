@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionFetchGameData } from '../actions';
+import { Redirect } from 'react-router-dom';
+import { actionFetchGameData, pauseTime, actionStart } from '../actions';
 
 import Loading from './Loading';
 import Questions from './Questions';
@@ -14,6 +15,7 @@ class Controller extends Component {
 
     this.state = {
       count: 0,
+      redirect: false,
     };
   }
 
@@ -23,27 +25,43 @@ class Controller extends Component {
   }
 
   handleNextQuestion() {
-    // const { count } = this.state;
+    const { start } = this.props;
+    const { count } = this.state;
+    const NUMBER = 4;
+
+    if (count === NUMBER) {
+      this.setState({ redirect: true });
+    }
+
     this.setState((prev) => ({
       count: prev.count + 1,
     }));
+
+    start();
   }
 
   render() {
     const { gameData, currentTime, isTimerPaused } = this.props;
-    const { count } = this.state;
-    console.log(gameData);
+    const { count, startTime, redirect } = this.state;
+    if (redirect) return <Redirect to="/feedback" />;
+
     return (
       <div>
+
         {!gameData.length ? (
           <Loading />
         ) : (
-          <Questions questionData={ gameData[count] } />
+          <Questions questionData={ gameData[count] } startTime={ startTime } />
         )}
-        {
-          (currentTime === 0 || isTimerPaused)
-        && <button type="button" data-testid="btn-next">Next</button>
-        }
+        {(currentTime === 0 || isTimerPaused) && (
+          <button
+            onClick={ this.handleNextQuestion }
+            type="button"
+            data-testid="btn-next"
+          >
+            Next
+          </button>
+        )}
       </div>
     );
   }
@@ -55,6 +73,7 @@ Controller.propTypes = {
   token: PropTypes.string.isRequired,
   isTimerPaused: PropTypes.bool.isRequired,
   currentTime: PropTypes.number.isRequired,
+  start: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -66,6 +85,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchGameData: (token) => dispatch(actionFetchGameData(token)),
+  stopTimer: () => dispatch(pauseTime()),
+  start: () => dispatch(actionStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controller);
