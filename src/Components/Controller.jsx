@@ -30,7 +30,7 @@ class Controller extends Component {
   }
 
   render() {
-    const { gameData } = this.props;
+    const { gameData, currentTime, isTimerPaused } = this.props;
     const { count } = this.state;
     console.log(gameData);
     return (
@@ -40,6 +40,10 @@ class Controller extends Component {
         ) : (
           <Questions questionData={ gameData[count] } />
         )}
+        {
+          (currentTime === 0 || isTimerPaused)
+        && <button type="button" data-testid="btn-next">Next</button>
+        }
       </div>
     );
   }
@@ -49,11 +53,15 @@ Controller.propTypes = {
   fetchGameData: PropTypes.func.isRequired,
   gameData: PropTypes.arrayOf(PropTypes.object).isRequired,
   token: PropTypes.string.isRequired,
+  isTimerPaused: PropTypes.bool.isRequired,
+  currentTime: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   gameData: state.game.gameData,
   token: state.user.token,
+  isTimerPaused: state.time.isTimerPaused,
+  currentTime: state.time.currentTime,
 });
 
 const mapDispatchToProps = (dispatch) => ({
