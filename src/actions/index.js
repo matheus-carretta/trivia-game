@@ -1,4 +1,4 @@
-import { FETCH_TOKEN, SAVE_USER, FETCH_GAME_DATA } from './types';
+import { FETCH_TOKEN, SAVE_USER, FETCH_GAME_DATA, PAUSE_TIME } from './types';
 import { apiTokenRequest, apiQuestionsRequest } from '../services/api';
 
 export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((token) => {
@@ -27,7 +27,6 @@ export const actionSaveUser = (user, gravatar) => ({
   },
 });
 
-export const actionXXY = () => ({
-  type: 'XXXY',
-  payload: {},
+export const pauseTime = () => ({
+  type: PAUSE_TIME,
 });
