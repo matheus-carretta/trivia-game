@@ -11,8 +11,8 @@ class Timer extends Component {
   }
 
   componentDidUpdate() {
-    const { currentTime } = this.props;
-    if (currentTime === 0) {
+    const { currentTime, isTimerPaused } = this.props;
+    if (currentTime === 0 || isTimerPaused) {
       clearInterval(this.timer);
     }
   }
@@ -30,6 +30,7 @@ class Timer extends Component {
 
 const mapStateToProps = (state) => ({
   currentTime: state.time.currentTime,
+  isTimerPaused: state.time.isTimerPaused,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,6 +40,7 @@ const mapDispatchToProps = (dispatch) => ({
 Timer.propTypes = {
   currentTime: PropTypes.number.isRequired,
   decrementTime: PropTypes.func.isRequired,
+  isTimerPaused: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

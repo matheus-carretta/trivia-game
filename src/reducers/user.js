@@ -1,4 +1,4 @@
-import { FETCH_TOKEN, SAVE_USER } from '../actions/types';
+import { FETCH_TOKEN, SAVE_USER, SAVE_SCORE } from '../actions/types';
 
 const INITIAL_STATE = {
   token: '',
@@ -24,6 +24,12 @@ const user = (state = INITIAL_STATE, { type, payload }) => {
       assertions: payload.user.assertions,
       score: payload.user.score,
       gravatar: `https://www.gravatar.com/avatar/${payload.gravatar}`,
+    };
+  case SAVE_SCORE:
+    return {
+      ...state,
+      score: state.score + payload.questionScore,
+      assertions: state.assertions + 1,
     };
   default:
     return state;
