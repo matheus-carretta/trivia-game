@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionSaveScore, pauseTime } from '../actions';
-import Timer from './Timer';
+// import Timer from './Timer';
 
 class Questions extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class Questions extends Component {
     const newAnswers = [questionData.correct_answer, ...questionData.incorrect_answers];
     return (
       <div>
-        <Timer />
+
         <h4 data-testid="question-category">{category}</h4>
         <h3 data-testid="question-text">{question}</h3>
         {newAnswers.sort().map((item, index) => (item === questionData.correct_answer ? (
