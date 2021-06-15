@@ -1,8 +1,12 @@
-import { FETCH_TOKEN,
+import {
+  FETCH_TOKEN,
   SAVE_USER,
   FETCH_GAME_DATA,
-  PAUSE_TIME, SET_TIMER,
-  SAVE_SCORE } from './types';
+  PAUSE_TIME,
+  SET_TIMER,
+  SAVE_SCORE,
+  REESTART_TIME,
+} from './types';
 import { apiTokenRequest, apiQuestionsRequest } from '../services/api';
 
 export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((token) => {
@@ -44,4 +48,8 @@ export const actionSaveScore = (questionScore) => ({
   payload: {
     questionScore,
   },
+});
+
+export const actionStart = () => ({
+  type: REESTART_TIME,
 });

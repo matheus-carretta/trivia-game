@@ -5,32 +5,39 @@ import { setTimer } from '../actions';
 
 class Timer extends Component {
   componentDidMount() {
-    const { decrementTime } = this.props;
-    const oneSec = 1000;
-    this.timer = setInterval(() => { decrementTime(); }, oneSec);
+    this.handleTimer();
   }
 
   componentDidUpdate() {
-    const { currentTime, isTimerPaused } = this.props;
+    const { currentTime, isTimerPaused, reestart } = this.props;
     if (currentTime === 0 || isTimerPaused) {
       clearInterval(this.timer);
     }
+
+    if (reestart) {
+      this.handleTimer();
+    }
+  }
+
+  handleTimer() {
+    const { decrementTime } = this.props;
+    const oneSec = 1000;
+    this.timer = setInterval(() => {
+      decrementTime();
+    }, oneSec);
   }
 
   render() {
     const { currentTime } = this.props;
-    console.log(currentTime);
-    return (
-      <div>
-        {currentTime}
-      </div>
-    );
+
+    return <div>{currentTime}</div>;
   }
 }
 
 const mapStateToProps = (state) => ({
   currentTime: state.time.currentTime,
   isTimerPaused: state.time.isTimerPaused,
+  reestart: state.time.reestart,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -41,6 +48,7 @@ Timer.propTypes = {
   currentTime: PropTypes.number.isRequired,
   decrementTime: PropTypes.func.isRequired,
   isTimerPaused: PropTypes.bool.isRequired,
+  reestart: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);
