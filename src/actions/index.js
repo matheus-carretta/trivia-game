@@ -1,5 +1,5 @@
-import { FETCH_TOKEN, SAVE_USER } from './types';
-import { apiTokenRequest } from '../services/api';
+import { FETCH_TOKEN, SAVE_USER, FETCH_GAME_DATA } from './types';
+import { apiTokenRequest, apiQuestionsRequest } from '../services/api';
 
 export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((token) => {
   localStorage.setItem('token', token);
@@ -10,6 +10,14 @@ export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((toke
     },
   });
 });
+
+export const actionFetchGameData = (token) => (dispatch) => apiQuestionsRequest(token)
+  .then((data) => dispatch({
+    type: FETCH_GAME_DATA,
+    payload: {
+      data,
+    },
+  }));
 
 export const actionSaveUser = (user, gravatar) => ({
   type: SAVE_USER,
