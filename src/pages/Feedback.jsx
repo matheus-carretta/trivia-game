@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
 
@@ -20,6 +21,9 @@ class Feedback extends Component {
         <h2 data-testid="feedback-total-question">
           {assertions}
         </h2>
+        <Link to="/">
+          <button type="button" data-testid="btn-play-again">Jogar novamente</button>
+        </Link>
       </div>
     );
   }

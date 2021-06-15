@@ -6,6 +6,7 @@ import { actionFetchGameData, pauseTime, actionStart } from '../actions';
 
 import Loading from './Loading';
 import Questions from './Questions';
+import Timer from './Timer';
 
 class Controller extends Component {
   constructor(props) {
@@ -51,7 +52,10 @@ class Controller extends Component {
         {!gameData.length ? (
           <Loading />
         ) : (
-          <Questions questionData={ gameData[count] } startTime={ startTime } />
+          <>
+            <Timer count={ count } />
+            <Questions questionData={ gameData[count] } startTime={ startTime } />
+          </>
         )}
         {(currentTime === 0 || isTimerPaused) && (
           <button
