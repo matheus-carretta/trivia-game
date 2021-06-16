@@ -26,6 +26,21 @@ class Controller extends Component {
     fetchGameData(token);
   }
 
+  handleLocalStora() {
+    const { name, gravatar, score } = this.props;
+    const newPlayer = { name, score, picture: gravatar };
+    const playerData = localStorage.getItem('ranking');
+
+    if (playerData) {
+      let playerArr = JSON.parse(playerData);
+      playerArr = [...playerArr, newPlayer];
+      localStorage.setItem('ranking', JSON.stringify(playerArr));
+    } else {
+      const playerArr = [newPlayer];
+      localStorage.setItem('ranking', JSON.stringify(playerArr));
+    }
+  }
+
   handleNextQuestion() {
     const { start, resetGame } = this.props;
     const { count } = this.state;
@@ -33,6 +48,7 @@ class Controller extends Component {
 
     if (count === NUMBER) {
       resetGame();
+      this.handleLocalStora();
       this.setState({ redirect: true });
     }
 
@@ -80,6 +96,9 @@ Controller.propTypes = {
   currentTime: PropTypes.number.isRequired,
   start: PropTypes.func.isRequired,
   resetGame: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  gravatar: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -87,6 +106,9 @@ const mapStateToProps = (state) => ({
   token: state.user.token,
   isTimerPaused: state.time.isTimerPaused,
   currentTime: state.time.currentTime,
+  name: state.user.name,
+  score: state.user.score,
+  gravatar: state.user.gravatar,
 });
 
 const mapDispatchToProps = (dispatch) => ({
