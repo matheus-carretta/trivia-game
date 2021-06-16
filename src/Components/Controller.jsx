@@ -6,10 +6,8 @@ import { actionFetchGameData,
   pauseTime,
   actionStart,
   actionResetGameData } from '../actions';
-
-import Loading from './Loading';
 import Questions from './Questions';
-// import Timer from './Timer';
+import Loading from './Loading';
 
 class Controller extends Component {
   constructor(props) {

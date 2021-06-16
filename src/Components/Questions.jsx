@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionSaveScore, pauseTime } from '../actions';
-// import Timer from './Timer';
 
 class Questions extends Component {
   constructor(props) {
