@@ -12,6 +12,7 @@ const time = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       isTimerPaused: true,
+      reeStart: false,
     };
   case SET_TIMER:
     return {

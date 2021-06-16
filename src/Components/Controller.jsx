@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { actionFetchGameData, pauseTime, actionStart } from '../actions';
+import { actionFetchGameData,
+  pauseTime,
+  actionStart,
+  actionResetGameData } from '../actions';
 
 import Loading from './Loading';
 import Questions from './Questions';
+// import Timer from './Timer';
 
 class Controller extends Component {
   constructor(props) {
@@ -25,11 +29,12 @@ class Controller extends Component {
   }
 
   handleNextQuestion() {
-    const { start } = this.props;
+    const { start, resetGame } = this.props;
     const { count } = this.state;
     const NUMBER = 4;
 
     if (count === NUMBER) {
+      resetGame();
       this.setState({ redirect: true });
     }
 
@@ -47,11 +52,13 @@ class Controller extends Component {
 
     return (
       <div>
-
         {!gameData.length ? (
           <Loading />
         ) : (
-          <Questions questionData={ gameData[count] } startTime={ startTime } />
+          <>
+            {/* <Timer count={ count } /> */}
+            <Questions questionData={ gameData[count] } startTime={ startTime } />
+          </>
         )}
         {(currentTime === 0 || isTimerPaused) && (
           <button
@@ -74,6 +81,7 @@ Controller.propTypes = {
   isTimerPaused: PropTypes.bool.isRequired,
   currentTime: PropTypes.number.isRequired,
   start: PropTypes.func.isRequired,
+  resetGame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -87,6 +95,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchGameData: (token) => dispatch(actionFetchGameData(token)),
   stopTimer: () => dispatch(pauseTime()),
   start: () => dispatch(actionStart()),
+  resetGame: () => dispatch(actionResetGameData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controller);
