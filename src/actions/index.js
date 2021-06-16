@@ -21,13 +21,14 @@ export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((toke
   });
 });
 
-export const actionFetchGameData = (token) => (dispatch) => apiQuestionsRequest(token)
-  .then((data) => dispatch({
-    type: FETCH_GAME_DATA,
-    payload: {
-      data,
-    },
-  }));
+export const actionFetchGameData = (token, settings) => (dispatch) => (
+  apiQuestionsRequest(token, settings)
+    .then((data) => dispatch({
+      type: FETCH_GAME_DATA,
+      payload: {
+        data,
+      },
+    })));
 
 export const actionSaveUser = (user, gravatar) => ({
   type: SAVE_USER,
