@@ -22,7 +22,7 @@ const time = (state = INITIAL_STATE, action) => {
   case REESTART_TIME:
     return {
       ...state,
-      reestart: true,
+      reestart: !state.reestart,
       currentTime: 30,
       isTimerPaused: false,
     };

@@ -63,7 +63,7 @@ class Questions extends Component {
     const newAnswers = [questionData.correct_answer, ...questionData.incorrect_answers];
     return (
       <div>
-        <Timer />
+
         <h4 data-testid="question-category">{category}</h4>
         <h3 data-testid="question-text">{question}</h3>
         {newAnswers.sort().map((item, index) => (item === questionData.correct_answer ? (
