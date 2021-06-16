@@ -6,6 +6,7 @@ import {
   SET_TIMER,
   SAVE_SCORE,
   REESTART_TIME,
+  RESET_GAME_DATA,
 } from './types';
 import { apiTokenRequest, apiQuestionsRequest } from '../services/api';
 
@@ -52,4 +53,8 @@ export const actionSaveScore = (questionScore) => ({
 
 export const actionStart = () => ({
   type: REESTART_TIME,
+});
+
+export const actionResetGameData = () => ({
+  type: RESET_GAME_DATA,
 });

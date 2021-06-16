@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { actionFetchGameData, pauseTime, actionStart } from '../actions';
-
-import Loading from './Loading';
+import { actionFetchGameData,
+  pauseTime,
+  actionStart,
+  actionResetGameData } from '../actions';
 import Questions from './Questions';
-import Timer from './Timer';
+import Loading from './Loading';
 
 class Controller extends Component {
   constructor(props) {
@@ -25,12 +26,29 @@ class Controller extends Component {
     fetchGameData(token);
   }
 
+  handleLocalStora() {
+    const { name, gravatar, score } = this.props;
+    const newPlayer = { name, score, picture: gravatar };
+    const playerData = localStorage.getItem('ranking');
+
+    if (playerData) {
+      let playerArr = JSON.parse(playerData);
+      playerArr = [...playerArr, newPlayer];
+      localStorage.setItem('ranking', JSON.stringify(playerArr));
+    } else {
+      const playerArr = [newPlayer];
+      localStorage.setItem('ranking', JSON.stringify(playerArr));
+    }
+  }
+
   handleNextQuestion() {
-    const { start } = this.props;
+    const { start, resetGame } = this.props;
     const { count } = this.state;
     const NUMBER = 4;
 
     if (count === NUMBER) {
+      resetGame();
+      this.handleLocalStora();
       this.setState({ redirect: true });
     }
 
@@ -48,12 +66,11 @@ class Controller extends Component {
 
     return (
       <div>
-
         {!gameData.length ? (
           <Loading />
         ) : (
           <>
-            <Timer count={ count } />
+            {/* <Timer count={ count } /> */}
             <Questions questionData={ gameData[count] } startTime={ startTime } />
           </>
         )}
@@ -78,6 +95,10 @@ Controller.propTypes = {
   isTimerPaused: PropTypes.bool.isRequired,
   currentTime: PropTypes.number.isRequired,
   start: PropTypes.func.isRequired,
+  resetGame: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  gravatar: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -85,12 +106,16 @@ const mapStateToProps = (state) => ({
   token: state.user.token,
   isTimerPaused: state.time.isTimerPaused,
   currentTime: state.time.currentTime,
+  name: state.user.name,
+  score: state.user.score,
+  gravatar: state.user.gravatar,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchGameData: (token) => dispatch(actionFetchGameData(token)),
   stopTimer: () => dispatch(pauseTime()),
   start: () => dispatch(actionStart()),
+  resetGame: () => dispatch(actionResetGameData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controller);
