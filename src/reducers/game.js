@@ -1,7 +1,12 @@
-import { FETCH_GAME_DATA, RESET_GAME_DATA } from '../actions/types';
+import { FETCH_GAME_DATA, RESET_GAME_DATA, SET_CONFIGURATION } from '../actions/types';
 
 const INITIAL_STATE = {
   gameData: [],
+  settings: {
+    category: '',
+    difficult: '',
+    type: '',
+  },
 };
 
 const game = (state = INITIAL_STATE, action) => {
@@ -17,7 +22,11 @@ const game = (state = INITIAL_STATE, action) => {
       ...state,
       gameData: [],
     };
-
+  case SET_CONFIGURATION:
+    return {
+      ...state,
+      settings: action.payload.settings,
+    };
   default:
     return state;
   }

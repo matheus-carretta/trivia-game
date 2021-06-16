@@ -7,6 +7,7 @@ import {
   SAVE_SCORE,
   REESTART_TIME,
   RESET_GAME_DATA,
+  SET_CONFIGURATION,
 } from './types';
 import { apiTokenRequest, apiQuestionsRequest } from '../services/api';
 
@@ -20,13 +21,14 @@ export const actionFetchToken = () => (dispatch) => apiTokenRequest().then((toke
   });
 });
 
-export const actionFetchGameData = (token) => (dispatch) => apiQuestionsRequest(token)
-  .then((data) => dispatch({
-    type: FETCH_GAME_DATA,
-    payload: {
-      data,
-    },
-  }));
+export const actionFetchGameData = (token, settings) => (dispatch) => (
+  apiQuestionsRequest(token, settings)
+    .then((data) => dispatch({
+      type: FETCH_GAME_DATA,
+      payload: {
+        data,
+      },
+    })));
 
 export const actionSaveUser = (user, gravatar) => ({
   type: SAVE_USER,
@@ -57,4 +59,11 @@ export const actionStart = () => ({
 
 export const actionResetGameData = () => ({
   type: RESET_GAME_DATA,
+});
+
+export const actionSetConfiguration = (settings) => ({
+  type: SET_CONFIGURATION,
+  payload: {
+    settings,
+  },
 });

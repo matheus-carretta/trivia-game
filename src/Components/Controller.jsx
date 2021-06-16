@@ -22,8 +22,8 @@ class Controller extends Component {
   }
 
   componentDidMount() {
-    const { fetchGameData, token } = this.props;
-    fetchGameData(token);
+    const { fetchGameData, token, settings } = this.props;
+    fetchGameData(token, settings);
   }
 
   handleLocalStora() {
@@ -99,6 +99,7 @@ Controller.propTypes = {
   name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   gravatar: PropTypes.string.isRequired,
+  settings: PropTypes.shape(Object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -109,10 +110,11 @@ const mapStateToProps = (state) => ({
   name: state.user.name,
   score: state.user.score,
   gravatar: state.user.gravatar,
+  settings: state.game.settings,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchGameData: (token) => dispatch(actionFetchGameData(token)),
+  fetchGameData: (token, settings) => dispatch(actionFetchGameData(token, settings)),
   stopTimer: () => dispatch(pauseTime()),
   start: () => dispatch(actionStart()),
   resetGame: () => dispatch(actionResetGameData()),
