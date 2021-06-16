@@ -10,9 +10,7 @@ export const apiTokenRequest = async () => {
 
 export const apiQuestionsRequest = async (token, settings) => {
   const { category, difficult, type } = settings;
-  // https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple
   const fetchApi = await fetch(
-    //  `https://opentdb.com/api.php?amount=5&token=${token}`,
     `https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficult}&type=${type}&token=${token}`,
   );
 
