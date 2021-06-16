@@ -7,6 +7,7 @@ import {
   SAVE_SCORE,
   REESTART_TIME,
   RESET_GAME_DATA,
+  SET_CONFIGURATION,
 } from './types';
 import { apiTokenRequest, apiQuestionsRequest } from '../services/api';
 
@@ -57,4 +58,11 @@ export const actionStart = () => ({
 
 export const actionResetGameData = () => ({
   type: RESET_GAME_DATA,
+});
+
+export const actionSetConfiguration = (settings) => ({
+  type: SET_CONFIGURATION,
+  payload: {
+    settings,
+  },
 });
