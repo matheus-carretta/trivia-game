@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Style/Login.css';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -42,38 +43,40 @@ class Login extends React.Component {
     if (redirect) return <Redirect to="/game" />;
 
     return (
-      <form onSubmit={ this.handleSubmit }>
-        <label htmlFor="input-player-name">
-          Nome:
-          <input
-            name="nome"
-            value={ nome }
-            id="input-player-name"
-            type="text"
-            data-testid="input-player-name"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="input-gravatar-email">
-          Email:
-          <input
-            name="email"
-            value={ email }
-            id="input-gravatar-email"
-            type="email"
-            data-testid="input-gravatar-email"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <button
-          type="submit"
-          data-testid="btn-play"
-          disabled={ !nome.length || !email.length }
-        >
-          Jogar
-        </button>
-        <Link data-testid="btn-settings" to="/settings">Settings</Link>
-      </form>
+      <div className="formContainer">
+        <form onSubmit={ this.handleSubmit }>
+          <label htmlFor="input-player-name">
+            <input
+              name="nome"
+              value={ nome }
+              id="input-player-name"
+              type="text"
+              data-testid="input-player-name"
+              onChange={ this.handleChange }
+              placeholder="Name"
+            />
+          </label>
+          <label htmlFor="input-gravatar-email">
+            <input
+              name="email"
+              value={ email }
+              id="input-gravatar-email"
+              type="email"
+              data-testid="input-gravatar-email"
+              onChange={ this.handleChange }
+              placeholder="Email"
+            />
+          </label>
+          <button
+            type="submit"
+            data-testid="btn-play"
+            disabled={ !nome.length || !email.length }
+          >
+            Play
+          </button>
+          <Link data-testid="btn-settings" to="/settings">Settings</Link>
+        </form>
+      </div>
     );
   }
 }

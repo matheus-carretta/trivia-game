@@ -5,18 +5,18 @@ import { Link } from 'react-router-dom';
 import { actionSetConfiguration } from '../actions/index';
 
 const INITIAL_STATE = {
-  category: '',
+  category: 20,
   difficult: '',
   type: '',
 };
-const listCategory = [
-  { id: 0, name: 'Any Category', value: '' },
-  { id: 11, name: 'Movies', value: 11 },
-  { id: 20, name: 'Mitology', value: 20 },
-  { id: 9, name: 'General Knowledge', value: 9 },
-  { id: 18, name: 'Computers', value: 18 },
-  { id: 21, name: 'Sports', value: 21 },
-];
+// const listCategory = [
+//   { id: 0, name: 'Any Category', value: '' },
+//   { id: 11, name: 'Movies', value: 11 },
+//   { id: 20, name: 'Mitology', value: 20 },
+//   { id: 9, name: 'General Knowledge', value: 9 },
+//   { id: 18, name: 'Computers', value: 18 },
+//   { id: 21, name: 'Sports', value: 21 },
+// ];
 
 const listDifficult = [
   { id: 0, name: 'both', value: '' },
@@ -47,11 +47,11 @@ class Settings extends Component {
     return (
       <div>
         <h1 data-testid="settings-title">Settings</h1>
-        <select name="category" onChange={ this.handleChange }>
+        {/* <select name="category" onChange={ this.handleChange }>
           {listCategory.map((category) => (
             <option key={ category.id } value={ category.value }>{category.name}</option>
           ))}
-        </select>
+        </select> */}
 
         <select name="difficult" onChange={ this.handleChange }>
           {listDifficult.map((difficult) => (

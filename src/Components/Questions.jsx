@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../Style/Questions.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionSaveScore, pauseTime } from '../actions';
@@ -9,6 +10,7 @@ class Questions extends Component {
     this.onClick = this.onClick.bind(this);
     this.calculateScore = this.calculateScore.bind(this);
     this.savePlayerInfos = this.savePlayerInfos.bind(this);
+    this.changeText = this.changeText.bind(this);
   }
 
   onClick({ target }) {
@@ -56,6 +58,10 @@ class Questions extends Component {
     localStorage.setItem('state', JSON.stringify(newInfos));
   }
 
+  changeText(text) {
+    return { __html: text };
+  }
+
   render() {
     const { questionData, isTimerPaused, currentTime } = this.props;
     const { category, question } = questionData;
@@ -63,7 +69,14 @@ class Questions extends Component {
     return (
       <div>
         <h4 data-testid="question-category">{category}</h4>
-        <h3 data-testid="question-text">{question}</h3>
+        <h3
+          data-testid="question-text"
+          // dangerouslySetInnerHTML={ this.changeText(question) }
+        >
+          {' '}
+          {question}
+        </h3>
+
         {newAnswers.sort().map((item, index) => (item === questionData.correct_answer ? (
           <button
             key={ index }
@@ -73,9 +86,14 @@ class Questions extends Component {
             className={ isTimerPaused ? 'correct-answer' : '' }
             onClick={ this.onClick }
             disabled={ isTimerPaused || currentTime === 0 }
+          //  dangerouslySetInnerHTML={ this.changeText(item) }
           >
+            {' '}
             {item}
+            {' '}
+
           </button>
+
         ) : (
           <button
             key={ index }

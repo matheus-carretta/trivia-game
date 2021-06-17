@@ -1,0 +1,17 @@
+.formContainer {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+form {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  justify-content: center;
+  margin: auto;
+  width: 25vw;
+}

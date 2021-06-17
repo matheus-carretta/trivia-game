@@ -3,7 +3,7 @@ import { FETCH_GAME_DATA, RESET_GAME_DATA, SET_CONFIGURATION } from '../actions/
 const INITIAL_STATE = {
   gameData: [],
   settings: {
-    category: '',
+    category: 20,
     difficult: '',
     type: '',
   },
