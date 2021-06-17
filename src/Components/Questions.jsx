@@ -67,7 +67,7 @@ class Questions extends Component {
     const { category, question } = questionData;
     const newAnswers = [questionData.correct_answer, ...questionData.incorrect_answers];
     return (
-      <div>
+      <div className="question">
         <h4 data-testid="question-category">{category}</h4>
         <h3
           data-testid="question-text"

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Style/Game.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
@@ -9,11 +10,13 @@ class Game extends React.Component {
   render() {
     const { gameData } = this.props;
     return (
-      <main>
+      <>
         <Header />
-        { gameData.length ? <Timer /> : null}
-        <Controller />
-      </main>
+        <main>
+          { gameData.length ? <Timer /> : null}
+          <Controller />
+        </main>
+      </>
     );
   }
 }
