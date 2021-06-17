@@ -44,8 +44,17 @@ class Login extends React.Component {
 
     return (
       <div className="formContainer">
+        <Link 
+        className="btn-ranking" 
+        to="/ranking"> 
+        <img 
+        className="ranking-icon"
+        alt="podium"  
+        src="https://image.flaticon.com/icons/png/512/1277/1277835.png"/>
+        </Link>
         <form onSubmit={ this.handleSubmit }>
-          <label htmlFor="input-player-name">
+          <h1 className="name-triva">Mithology Trivia</h1>
+          <label className="nome" htmlFor="input-player-name">
             <input
               name="nome"
               value={ nome }
@@ -68,14 +77,25 @@ class Login extends React.Component {
             />
           </label>
           <button
+            className="btn-play"
             type="submit"
             data-testid="btn-play"
             disabled={ !nome.length || !email.length }
           >
             Play
           </button>
-          <Link data-testid="btn-settings" to="/settings">Settings</Link>
         </form>
+        <Link
+          className="btn-settings"
+          data-testid="btn-settings"
+          to="/settings"
+        >
+          <img
+            className="settings-icon"
+            src="https://img-premium.flaticon.com/png/512/484/premium/484562.png?token=exp=1623959011~hmac=43114dfe0afda660ab124549cc248fc6"
+            alt="settings"
+          />
+        </Link>
       </div>
     );
   }
