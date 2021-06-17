@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../Style/Feedback.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -9,25 +10,45 @@ class Feedback extends Component {
     const { assertions, score } = this.props;
     const minAssertions = 3;
     return (
-      <div>
+      <div className="feedback">
         <Header />
-        <h1 data-testid="feedback-text">Feedback</h1>
-        {assertions >= minAssertions
-          ? <h2 data-testid="feedback-text">Mandou bem!</h2>
-          : <h2 data-testid="feedback-text">Podia ser melhor...</h2>}
-        <h2 data-testid="feedback-total-score">
-          {score}
-        </h2>
-        <h2 data-testid="feedback-total-question">
-          {assertions}
-        </h2>
-        <Link to="/">
-          <button type="button" data-testid="btn-play-again">Jogar novamente</button>
-        </Link>
+        <div className="box-feedback">
+          <h1 data-testid="feedback-text">Feedback</h1>
+          {assertions >= minAssertions
+            ? <h2 data-testid="feedback-text">Mandou bem!</h2>
+            : <h2 data-testid="feedback-text">Podia ser melhor...</h2>}
+          <h2 data-testid="feedback-total-score">
+            Score:
+            {' '}
+            {score}
+          </h2>
+          <h2 data-testid="feedback-total-question">
+            Assertions:
+            {' '}
+            {assertions}
+          </h2>
+          <div className="feedback-btn-box">
+            <Link to="/">
+              <button
+                className="btn-feedback"
+                type="button"
+                data-testid="btn-play-again"
+              >
+                Play Again
+              </button>
+            </Link>
 
-        <Link to="/ranking">
-          <button type="button" data-testid="btn-ranking">Ver Ranking</button>
-        </Link>
+            <Link to="/ranking">
+              <button
+                className="btn-feedback"
+                type="button"
+                data-testid="btn-ranking"
+              >
+                Ranking
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

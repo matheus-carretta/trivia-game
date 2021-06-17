@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../Style/Controller.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -65,7 +66,7 @@ class Controller extends Component {
     if (redirect) return <Redirect to="/feedback" />;
 
     return (
-      <div>
+      <div className="controller">
         {!gameData.length ? (
           <Loading />
         ) : (
@@ -76,6 +77,7 @@ class Controller extends Component {
         )}
         {(currentTime === 0 || isTimerPaused) && (
           <button
+            className="btn-next"
             onClick={ this.handleNextQuestion }
             type="button"
             data-testid="btn-next"

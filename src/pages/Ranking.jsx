@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Style/Ranking.css';
 import { Link } from 'react-router-dom';
 
 class Ranking extends React.Component {
@@ -25,12 +26,12 @@ class Ranking extends React.Component {
 
   render() {
     const { arrRankingPlayers } = this.state;
-
+    const maxPositionsRanking = 3;
     return (
-      <div>
+      <div className="ranking">
         <h1 data-testid="ranking-title">Ranking</h1>
-        {arrRankingPlayers.map((item, index) => (
-          <div key={ index }>
+        {arrRankingPlayers.slice(0, maxPositionsRanking).map((item, index) => (
+          <div className="position-ranking" key={ index }>
             <img src={ item.picture } alt={ item.picture } />
             <p data-testid={ `player-name-${index}` }>{item.name}</p>
             <p data-testid={ `player-score-${index}` }>{item.score}</p>

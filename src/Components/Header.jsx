@@ -15,14 +15,19 @@ class Header extends React.Component {
         />
         <h4
           data-testid="header-player-name"
+          className="player"
         >
           Player:
+          {' '}
           { name }
         </h4>
 
         <h4
+          className="score"
           data-testid="header-score"
         >
+          Score:
+          {' '}
           { score }
         </h4>
       </header>

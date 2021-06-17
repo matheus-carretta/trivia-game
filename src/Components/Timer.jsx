@@ -31,7 +31,11 @@ class Timer extends Component {
   render() {
     const { currentTime } = this.props;
 
-    return <div>{currentTime}</div>;
+    return (
+      <div className="timer">
+        Timer:
+        {currentTime}
+      </div>);
   }
 }
 

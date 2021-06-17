@@ -64,50 +64,52 @@ class Questions extends Component {
 
   render() {
     const { questionData, isTimerPaused, currentTime } = this.props;
-    const { category, question } = questionData;
+    const { question } = questionData;
     const newAnswers = [questionData.correct_answer, ...questionData.incorrect_answers];
     return (
       <div className="question">
-        <h4 data-testid="question-category">{category}</h4>
+        {/* <h4 data-testid="question-category">{category}</h4> */}
         <h3
+          className="question-text"
           data-testid="question-text"
           // dangerouslySetInnerHTML={ this.changeText(question) }
         >
           {' '}
           {question}
         </h3>
+        <div className="buttons">
+          {newAnswers.sort().map((item, index) => (item === questionData.correct_answer ? (
+            <button
+              key={ index }
+              type="button"
+              name="correct-answer"
+              data-testid="correct-answer"
+              className={ isTimerPaused ? 'correct-answer' : '' }
+              onClick={ this.onClick }
+              disabled={ isTimerPaused || currentTime === 0 }
+              //  dangerouslySetInnerHTML={ this.changeText(item) }
+            >
+              {' '}
+              {item}
+              {' '}
 
-        {newAnswers.sort().map((item, index) => (item === questionData.correct_answer ? (
-          <button
-            key={ index }
-            type="button"
-            name="correct-answer"
-            data-testid="correct-answer"
-            className={ isTimerPaused ? 'correct-answer' : '' }
-            onClick={ this.onClick }
-            disabled={ isTimerPaused || currentTime === 0 }
-          //  dangerouslySetInnerHTML={ this.changeText(item) }
-          >
-            {' '}
-            {item}
-            {' '}
+            </button>
 
-          </button>
-
-        ) : (
-          <button
-            key={ index }
-            type="button"
-            name="wrong-answer"
-            data-testid={ `wrong-answer-${index}` }
-            className={ isTimerPaused ? 'wrong-answer' : '' }
-            onClick={ this.onClick }
-            disabled={ isTimerPaused || currentTime === 0 }
-          >
-            {item}
-          </button>
-        )
-        ))}
+          ) : (
+            <button
+              key={ index }
+              type="button"
+              name="wrong-answer"
+              data-testid={ `wrong-answer-${index}` }
+              className={ isTimerPaused ? 'wrong-answer' : '' }
+              onClick={ this.onClick }
+              disabled={ isTimerPaused || currentTime === 0 }
+            >
+              {item}
+            </button>
+          )
+          ))}
+        </div>
       </div>
     );
   }

@@ -13,8 +13,10 @@ class Game extends React.Component {
       <>
         <Header />
         <main>
-          { gameData.length ? <Timer /> : null}
-          <Controller />
+          <div className="box-question">
+            { gameData.length ? <Timer /> : null}
+            <Controller />
+          </div>
         </main>
       </>
     );
