@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../Style/Settings.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -19,13 +20,13 @@ const INITIAL_STATE = {
 // ];
 
 const listDifficult = [
-  { id: 0, name: 'both', value: '' },
+  { id: 0, name: 'random', value: '' },
   { id: 1, name: 'easy', value: 'easy' },
   { id: 2, name: 'medium', value: 'medium' },
   { id: 3, name: 'hard', value: 'hard' },
 ];
 const listType = [
-  { id: 0, name: 'both', value: '' },
+  { id: 0, name: 'random', value: '' },
   { id: 1, name: 'boolean', value: 'boolean' },
   { id: 2, name: 'multiple', value: 'multiple' },
 ];
@@ -45,37 +46,49 @@ class Settings extends Component {
   render() {
     const { saveSettings } = this.props;
     return (
-      <div>
-        <h1 data-testid="settings-title">Settings</h1>
-        {/* <select name="category" onChange={ this.handleChange }>
+      <div className="settings">
+        <div className="box-settings">
+          <h1 data-testid="settings-title">Settings</h1>
+          {/* <select name="category" onChange={ this.handleChange }>
           {listCategory.map((category) => (
             <option key={ category.id } value={ category.value }>{category.name}</option>
           ))}
         </select> */}
-
-        <select name="difficult" onChange={ this.handleChange }>
-          {listDifficult.map((difficult) => (
-            <option
-              key={ difficult.id }
-              value={ difficult.value }
-            >
-              {difficult.name}
-            </option>))}
-        </select>
-
-        <select name="type" onChange={ this.handleChange }>
-          {listType.map((type) => (
-            <option key={ type.id } value={ type.value }>{type.name}</option>))}
-        </select>
-        <Link to="/">
-
-          <button
-            type="button"
-            onClick={ () => { saveSettings(this.state); } }
-          >
-            Save Settings
-          </button>
-        </Link>
+          <div className="options">
+            <div className="box-intern">
+              <label htmlFor="difficult">
+                Difficult:
+                <select name="difficult" onChange={ this.handleChange }>
+                  {listDifficult.map((difficult) => (
+                    <option
+                      key={ difficult.id }
+                      value={ difficult.value }
+                    >
+                      {difficult.name}
+                    </option>))}
+                </select>
+              </label>
+            </div>
+            <div className="box-intern">
+              <label htmlFor="type">
+                Type:
+                <select name="type" onChange={ this.handleChange }>
+                  {listType.map((type) => (
+                    <option key={ type.id } value={ type.value }>{type.name}</option>))}
+                </select>
+              </label>
+            </div>
+            <Link to="/">
+              <button
+                className="btn-save-settings"
+                type="button"
+                onClick={ () => { saveSettings(this.state); } }
+              >
+                Save Settings
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

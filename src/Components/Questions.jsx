@@ -72,11 +72,9 @@ class Questions extends Component {
         <h3
           className="question-text"
           data-testid="question-text"
-          // dangerouslySetInnerHTML={ this.changeText(question) }
-        >
-          {' '}
-          {question}
-        </h3>
+          dangerouslySetInnerHTML={ this.changeText(question) }
+        />
+
         <div className="buttons">
           {newAnswers.sort().map((item, index) => (item === questionData.correct_answer ? (
             <button
@@ -87,13 +85,8 @@ class Questions extends Component {
               className={ isTimerPaused ? 'correct-answer' : '' }
               onClick={ this.onClick }
               disabled={ isTimerPaused || currentTime === 0 }
-              //  dangerouslySetInnerHTML={ this.changeText(item) }
-            >
-              {' '}
-              {item}
-              {' '}
-
-            </button>
+              dangerouslySetInnerHTML={ this.changeText(item) }
+            />
 
           ) : (
             <button

@@ -37,7 +37,7 @@ class Ranking extends React.Component {
             <p data-testid={ `player-score-${index}` }>{item.score}</p>
           </div>
         ))}
-        <Link data-testid="btn-go-home" to="/">Voltar</Link>
+        <Link className="btn-back" data-testid="btn-go-home" to="/">Back</Link>
       </div>
     );
   }
