@@ -54,3 +54,15 @@
   text-decoration: none;
   width: 46px;
 }
+
+.ranking-1 {
+  border: 3px solid #f5cd01;
+}
+
+.ranking-2 {
+  border: 3px solid silver;
+}
+
+.ranking-3 {
+  border: 3px solid #cd7f32;
+}

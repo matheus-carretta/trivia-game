@@ -23,6 +23,7 @@ main {
 
 .timer {
   align-self: flex-end;
+  margin-bottom: 20px;
 }
 
 .question-text {

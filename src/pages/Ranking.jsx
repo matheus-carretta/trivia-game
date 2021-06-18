@@ -18,10 +18,12 @@ class Ranking extends React.Component {
   handleRanking() {
     // const { arrRankingPlayers } = this.state;
     const localRanking = JSON.parse(localStorage.getItem('ranking'));
-    localRanking.sort((a, b) => b.score - a.score);
-    this.setState({
-      arrRankingPlayers: localRanking,
-    });
+    if (localRanking) {
+      localRanking.sort((a, b) => b.score - a.score);
+      this.setState({
+        arrRankingPlayers: localRanking,
+      });
+    }
   }
 
   render() {
@@ -31,7 +33,7 @@ class Ranking extends React.Component {
       <div className="ranking">
         <h1 data-testid="ranking-title">Ranking</h1>
         {arrRankingPlayers.slice(0, maxPositionsRanking).map((item, index) => (
-          <div className="position-ranking" key={ index }>
+          <div className={ `position-ranking ranking-${index + 1}` } key={ index }>
             <img src={ item.picture } alt={ item.picture } />
             <p data-testid={ `player-name-${index}` }>{item.name}</p>
             <p data-testid={ `player-score-${index}` }>{item.score}</p>
