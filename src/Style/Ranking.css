@@ -10,8 +10,8 @@
   background-size: cover;
   height: 100vh;
   padding-left: 25px;
-  width: 98.9vw;
   position: relative;
+  width: 98.9vw;
 }
 
 .ranking h1 {
@@ -41,7 +41,16 @@
   border-radius: 50%;
 }
 
-.ranking a {
-  background-color: red;
+.btn-back {
+  background-color: rgb(99, 166, 243);
+  box-shadow: 5px 5px 10px black;
+  color: black;
+  display: block;
+  font-size: 20px;
+  margin-left: 240px;
   margin-top: 50px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  width: 46px;
 }
