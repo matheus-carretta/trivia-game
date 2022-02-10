@@ -92,7 +92,7 @@ class Login extends React.Component {
         >
           <img
             className="settings-icon"
-            src="https://img-premium.flaticon.com/png/512/484/premium/484562.png?token=exp=1623959011~hmac=43114dfe0afda660ab124549cc248fc6"
+            src="https://cdn-icons.flaticon.com/png/512/2040/premium/2040504.png?token=exp=1644470173~hmac=8c65e8078683485b273c4da486d6221e"
             alt="settings"
           />
         </Link>
